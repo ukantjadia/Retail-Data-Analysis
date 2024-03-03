@@ -571,7 +571,7 @@ plt.title(<span class="hljs-string">'Sales by Ship Mode'</span>)
 plt.show()
 
 </div></code></pre>
-<p><img src="output_18_0.png" alt="png"></p>
+<p><img src="./image/output_18_0.png" alt="png"></p>
 <pre class="hljs"><code><div><span class="hljs-comment"># import seaborn as sns</span>
 <span class="hljs-comment"># import matplotlib.pyplot as plt</span>
 
@@ -592,7 +592,7 @@ plt.title(<span class="hljs-string">'Profit by Ship Mode'</span>)
 plt.show()
 
 </div></code></pre>
-<p><img src="output_19_0.png" alt="png"></p>
+<p><img src="./image/output_19_0.png" alt="png"></p>
 <pre class="hljs"><code><div><span class="hljs-comment"># import seaborn as sns</span>
 <span class="hljs-comment"># import matplotlib.pyplot as plt</span>
 
@@ -613,7 +613,7 @@ plt.title(<span class="hljs-string">'Discount by Ship Mode'</span>)
 plt.show()
 
 </div></code></pre>
-<p><img src="output_20_0.png" alt="png"></p>
+<p><img src="./image/output_20_0.png" alt="png"></p>
 <pre class="hljs"><code><div>df[<span class="hljs-string">'City'</span>].nunique()
 </div></code></pre>
 <pre><code>531
@@ -643,7 +643,7 @@ plt.title(<span class="hljs-string">'Top 10 Cities with Highest Total Profit'</s
 plt.show()
 
 </div></code></pre>
-<p><img src="output_24_0.png" alt="png"></p>
+<p><img src="./image/output_24_0.png" alt="png"></p>
 <h4 id="profit-and-category-sub-category">Profit and category, sub category</h4>
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
@@ -665,7 +665,7 @@ plt.show()
 tt = df.groupby([<span class="hljs-string">'Category'</span>, <span class="hljs-string">'Sub-Category'</span>])[<span class="hljs-string">'Profit'</span>].sum()
 tt
 </div></code></pre>
-<p><img src="output_26_0.png" alt="png"></p>
+<p><img src="./image/output_26_0.png" alt="png"></p>
 <pre><code>Category         Sub-Category
 Furniture        Bookcases       -3398.7542
                  Chairs          26567.1278
@@ -710,7 +710,7 @@ plt.title(<span class="hljs-string">'Total Profit by Segment'</span>)
 plt.show()
 
 </div></code></pre>
-<p><img src="output_28_0.png" alt="png"></p>
+<p><img src="./image/output_28_0.png" alt="png"></p>
 <pre class="hljs"><code><div>profit_by_segment = df.groupby(<span class="hljs-string">'Segment'</span>)[<span class="hljs-string">'Profit'</span>].sum().reset_index()
 
 plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>))
@@ -719,7 +719,7 @@ plt.title(<span class="hljs-string">'Profit Distribution by Segment'</span>)
 plt.axis(<span class="hljs-string">'equal'</span>)  
 plt.show()
 </div></code></pre>
-<p><img src="output_29_0.png" alt="png"></p>
+<p><img src="./image/output_29_0.png" alt="png"></p>
 <pre class="hljs"><code><div>profit_by_segment = df.groupby(<span class="hljs-string">'Segment'</span>)[<span class="hljs-string">'Sales'</span>].sum().reset_index()
 
 plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>))
@@ -728,7 +728,7 @@ plt.title(<span class="hljs-string">'Sales Distribution by Segment'</span>)
 plt.axis(<span class="hljs-string">'equal'</span>)  
 plt.show()
 </div></code></pre>
-<p><img src="output_30_0.png" alt="png"></p>
+<p><img src="./image/output_30_0.png" alt="png"></p>
 <h3 id="quantity">Quantity</h3>
 <h4 id="quantity-and-segment">Quantity and segment</h4>
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
@@ -754,7 +754,7 @@ plt.title(<span class="hljs-string">'Total Quantity by Segment'</span>)
 plt.show()
 
 </div></code></pre>
-<p><img src="output_33_0.png" alt="png"></p>
+<p><img src="./image/output_33_0.png" alt="png"></p>
 <h4 id="quantity-and-state">Quantity and state</h4>
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
@@ -783,7 +783,7 @@ plt.xticks(rotation=<span class="hljs-number">45</span>)  <span class="hljs-comm
 plt.show()
 
 </div></code></pre>
-<p><img src="output_35_0.png" alt="png"></p>
+<p><img src="./image/output_35_0.png" alt="png"></p>
 <h4 id="quantity-and-city">Quantity and city</h4>
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
@@ -812,7 +812,7 @@ plt.xticks(rotation=<span class="hljs-number">45</span>)  <span class="hljs-comm
 plt.show()
 
 </div></code></pre>
-<p><img src="output_37_0.png" alt="png"></p>
+<p><img src="./image/output_37_0.png" alt="png"></p>
 <h3 id="sales">Sales</h3>
 <h4 id="sales-with-region-and-city">Sales with region and city</h4>
 <pre class="hljs"><code><div>top_10_cities_by_region = df.groupby([<span class="hljs-string">'Region'</span>, <span class="hljs-string">'City'</span>])[<span class="hljs-string">'Sales'</span>].sum().groupby(<span class="hljs-string">'Region'</span>, group_keys=<span class="hljs-literal">False</span>).nlargest(<span class="hljs-number">5</span>)
@@ -830,7 +830,7 @@ plt.xticks(rotation=<span class="hljs-number">45</span>, ha=<span class="hljs-st
 plt.tight_layout()
 plt.show()
 </div></code></pre>
-<p><img src="output_40_0.png" alt="png"></p>
+<p><img src="./image/output_40_0.png" alt="png"></p>
 
 </body>
 </html>

@@ -10,4 +10,9 @@ In today's tough business world, companies need useful insights to grow and make
 - Analyze the category and subcategory with the highest profit. [Link](#profit-and-category-sub-category)
 - Identify the segment with the highest profit and sales. [Link](profit-and-segment)
 
+## Images
 
+![1709465942896](image/README/1709465942896.png)
+![1709465962239](image/README/1709465962239.png)
+![1709465973882](image/README/1709465973882.png)
+![1709465979238](image/README/1709465979238.png)
