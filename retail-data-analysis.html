@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>retail-data-analysis.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="retail-data-analysis">Retail Data Analysis</h1>
+<ul>
+<li><a href="#retail-data-analysis">Retail Data Analysis</a>
+<ul>
+<li><a href="#problem-statement">Problem Statement</a></li>
+<li><a href="#code">Code</a></li>
+<li><a href="#data-and-imports">Data and imports</a>
+<ul>
+<li><a href="#generating-null-report">Generating Null report</a></li>
+<li><a href="#see-duplicates">see duplicates</a></li>
+</ul>
+</li>
+<li><a href="#finding-insights">Finding insights</a>
+<ul>
+<li><a href="#ship-mode">Ship mode</a></li>
+<li><a href="#profit">Profit</a>
+<ul>
+<li><a href="#profit-and-city">Profit and city,</a></li>
+<li><a href="#profit-and-category-sub-category">Profit and category, sub category</a></li>
+<li><a href="#profit-and-segment">Profit and segment</a></li>
+</ul>
+</li>
+<li><a href="#quantity">Quantity</a>
+<ul>
+<li><a href="#quantity-and-segment">Quantity and segment</a></li>
+<li><a href="#quantity-and-state">Quantity and state</a></li>
+<li><a href="#quantity-and-city">Quantity and city</a></li>
+</ul>
+</li>
+<li><a href="#sales">Sales</a>
+<ul>
+<li><a href="#sales-with-region-and-city">Sales with region and city</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="problem-statement">Problem Statement</h2>
+<ul>
+<li>Identify the region and city with the highest sales. <a href="#sales-with-region-and-city">Link</a></li>
+<li>Ship Mode's Impact on Profitability and Sales. <a href="#ship-mode">Link</a></li>
+<li>Analyze the category and subcategory with the highest profit. <a href="#profit-and-category-sub-category">Link</a></li>
+<li>Identify the segment with the highest profit and sales. <a href="profit-and-segment">Link</a></li>
+</ul>
+<h2 id="code">Code</h2>
+<pre class="hljs"><code><div>%pip install pandas numpy matplotlib seaborn
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+<span class="hljs-keyword">import</span> matplotlib
+</div></code></pre>
+<pre class="hljs"><code><div>print(np.__version__)
+print(pd.__version__)
+print(sns.__version__)
+print(matplotlib.__version__)
+
+</div></code></pre>
+<pre><code>1.23.5
+1.5.3
+0.12.2
+3.7.0
+</code></pre>
+<h2 id="data-and-imports">Data and imports</h2>
+<pre class="hljs"><code><div>df = pd.read_csv(<span class="hljs-string">"./data/Analysis of Super Store - DA.csv"</span>)
+</div></code></pre>
+<pre class="hljs"><code><div>df.head(<span class="hljs-number">2</span>)
+</div></code></pre>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+<pre><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ship Mode</th>
+      <th>Segment</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Postal Code</th>
+      <th>Region</th>
+      <th>Category</th>
+      <th>Sub-Category</th>
+      <th>Sales</th>
+      <th>Quantity</th>
+      <th>Discount</th>
+      <th>Profit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Second Class</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Henderson</td>
+      <td>Kentucky</td>
+      <td>42420</td>
+      <td>South</td>
+      <td>Furniture</td>
+      <td>Bookcases</td>
+      <td>261.96</td>
+      <td>2</td>
+      <td>0.0</td>
+      <td>41.9136</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Second Class</td>
+      <td>Consumer</td>
+      <td>United States</td>
+      <td>Henderson</td>
+      <td>Kentucky</td>
+      <td>42420</td>
+      <td>South</td>
+      <td>Furniture</td>
+      <td>Chairs</td>
+      <td>731.94</td>
+      <td>3</td>
+      <td>0.0</td>
+      <td>219.5820</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<pre class="hljs"><code><div>df.columns
+</div></code></pre>
+<pre><code>Index(['Ship Mode', 'Segment', 'Country', 'City', 'State', 'Postal Code',
+       'Region', 'Category', 'Sub-Category', 'Sales', 'Quantity', 'Discount',
+       'Profit'],
+      dtype='object')
+</code></pre>
+<h4 id="generating-null-report">Generating Null report</h4>
+<pre class="hljs"><code><div>df.isnull().sum()
+</div></code></pre>
+<pre><code>Ship Mode       0
+Segment         0
+Country         0
+City            0
+State           0
+Region          0
+Category        0
+Sub-Category    0
+Sales           0
+Quantity        0
+Discount        0
+Profit          0
+dtype: int64
+</code></pre>
+<pre class="hljs"><code><div>df.drop(columns=[<span class="hljs-string">'Postal Code'</span>],inplace=<span class="hljs-literal">True</span>)
+</div></code></pre>
+<h4 id="see-duplicates">see duplicates</h4>
+<pre class="hljs"><code><div>df.duplicated().sum()
+</div></code></pre>
+<pre><code>50
+</code></pre>
+<pre class="hljs"><code><div>df = df.drop_duplicates()
+</div></code></pre>
+<pre class="hljs"><code><div>df.duplicated().sum()
+</div></code></pre>
+<pre><code>0
+</code></pre>
+<h2 id="finding-insights">Finding insights</h2>
+<pre class="hljs"><code><div>df.columns
+</div></code></pre>
+<pre><code>Index(['Ship Mode', 'Segment', 'Country', 'City', 'State', 'Region',
+       'Category', 'Sub-Category', 'Sales', 'Quantity', 'Discount', 'Profit'],
+      dtype='object')
+</code></pre>
+<h3 id="ship-mode">Ship mode</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># import seaborn as sns</span>
+<span class="hljs-comment"># import matplotlib.pyplot as plt</span>
+
+<span class="hljs-comment"># Group by Ship Mode and calculate total profit</span>
+profit_by_ship_mode = df.groupby(<span class="hljs-string">'Ship Mode'</span>)[<span class="hljs-string">'Sales'</span>].sum().reset_index()
+
+<span class="hljs-comment"># Plot</span>
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+bar_plot = sns.barplot(x=<span class="hljs-string">'Ship Mode'</span>, y=<span class="hljs-string">'Sales'</span>, data=profit_by_ship_mode, hue=<span class="hljs-string">'Ship Mode'</span>,palette=<span class="hljs-string">'viridis'</span>)
+plt.xlabel(<span class="hljs-string">'Ship Mode'</span>)
+plt.ylabel(<span class="hljs-string">'Total Sales'</span>)
+plt.title(<span class="hljs-string">'Sales by Ship Mode'</span>)
+
+<span class="hljs-comment"># Add total profit as text on each bar</span>
+<span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(profit_by_ship_mode[<span class="hljs-string">'Sales'</span>]):
+    bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
+
+plt.show()
+
+</div></code></pre>
+<p><img src="output_18_0.png" alt="png"></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># import seaborn as sns</span>
+<span class="hljs-comment"># import matplotlib.pyplot as plt</span>
+
+<span class="hljs-comment"># Group by Ship Mode and calculate total profit</span>
+profit_by_ship_mode = df.groupby(<span class="hljs-string">'Ship Mode'</span>)[<span class="hljs-string">'Profit'</span>].sum().reset_index()
+
+<span class="hljs-comment"># Plot</span>
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+bar_plot = sns.barplot(x=<span class="hljs-string">'Ship Mode'</span>, y=<span class="hljs-string">'Profit'</span>, data=profit_by_ship_mode, hue=<span class="hljs-string">'Ship Mode'</span>,palette=<span class="hljs-string">'viridis'</span>)
+plt.xlabel(<span class="hljs-string">'Ship Mode'</span>)
+plt.ylabel(<span class="hljs-string">'Total Profit'</span>)
+plt.title(<span class="hljs-string">'Profit by Ship Mode'</span>)
+
+<span class="hljs-comment"># Add total profit as text on each bar</span>
+<span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(profit_by_ship_mode[<span class="hljs-string">'Profit'</span>]):
+    bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
+
+plt.show()
+
+</div></code></pre>
+<p><img src="output_19_0.png" alt="png"></p>
+<pre class="hljs"><code><div><span class="hljs-comment"># import seaborn as sns</span>
+<span class="hljs-comment"># import matplotlib.pyplot as plt</span>
+
+<span class="hljs-comment"># Group by Ship Mode and calculate total profit</span>
+profit_by_ship_mode = df.groupby(<span class="hljs-string">'Ship Mode'</span>)[<span class="hljs-string">'Discount'</span>].sum().reset_index()
+
+<span class="hljs-comment"># Plot</span>
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+bar_plot = sns.barplot(x=<span class="hljs-string">'Ship Mode'</span>, y=<span class="hljs-string">'Discount'</span>, data=profit_by_ship_mode, hue=<span class="hljs-string">'Ship Mode'</span>,palette=<span class="hljs-string">'viridis'</span>)
+plt.xlabel(<span class="hljs-string">'Ship Mode'</span>)
+plt.ylabel(<span class="hljs-string">'Total Discount'</span>)
+plt.title(<span class="hljs-string">'Discount by Ship Mode'</span>)
+
+<span class="hljs-comment"># Add total profit as text on each bar</span>
+<span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(profit_by_ship_mode[<span class="hljs-string">'Discount'</span>]):
+    bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
+
+plt.show()
+
+</div></code></pre>
+<p><img src="output_20_0.png" alt="png"></p>
+<pre class="hljs"><code><div>df[<span class="hljs-string">'City'</span>].nunique()
+</div></code></pre>
+<pre><code>531
+</code></pre>
+<h3 id="profit">Profit</h3>
+<h4 id="profit-and-city">Profit and city,</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># Group by City and calculate total profit</span>
+profit_by_city = df.groupby(<span class="hljs-string">'City'</span>)[<span class="hljs-string">'Profit'</span>].sum().reset_index()
+
+<span class="hljs-comment"># Select the top 10 cities with the highest profit</span>
+top_10_profit_cities = profit_by_city.nlargest(<span class="hljs-number">10</span>, <span class="hljs-string">'Profit'</span>)
+
+<span class="hljs-comment"># Plot</span>
+plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">8</span>))
+bar_plot = sns.barplot(x=<span class="hljs-string">'Profit'</span>, y=<span class="hljs-string">'City'</span>, data=top_10_profit_cities, order=top_10_profit_cities[<span class="hljs-string">'City'</span>])
+plt.xlabel(<span class="hljs-string">'Total Profit'</span>)
+plt.ylabel(<span class="hljs-string">'City'</span>)
+plt.title(<span class="hljs-string">'Top 10 Cities with Highest Total Profit'</span>)
+
+<span class="hljs-comment"># Add total profit as text on each bar</span>
+<span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(top_10_profit_cities[<span class="hljs-string">'Profit'</span>]):
+    bar_plot.text(v + <span class="hljs-number">50</span>, i, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, va=<span class="hljs-string">'center'</span>)
+
+plt.show()
+
+</div></code></pre>
+<p><img src="output_24_0.png" alt="png"></p>
+<h4 id="profit-and-category-sub-category">Profit and category, sub category</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+profit_by_category_subcategory = df.groupby([<span class="hljs-string">'Category'</span>, <span class="hljs-string">'Sub-Category'</span>])[<span class="hljs-string">'Profit'</span>].sum().reset_index()
+
+profit_by_category_subcategory_sorted = profit_by_category_subcategory.sort_values(by=[<span class="hljs-string">'Category'</span>, <span class="hljs-string">'Profit'</span>], ascending=[<span class="hljs-literal">True</span>, <span class="hljs-literal">True</span>])
+
+plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">8</span>))
+
+sns.barplot(x=<span class="hljs-string">'Sub-Category'</span>, y=<span class="hljs-string">'Profit'</span>, hue=<span class="hljs-string">'Category'</span>, data=profit_by_category_subcategory_sorted, dodge=<span class="hljs-literal">False</span>, alpha=<span class="hljs-number">0.7</span>)
+plt.xlabel(<span class="hljs-string">'Sub-Category'</span>)
+plt.ylabel(<span class="hljs-string">'Total Profit'</span>)
+plt.title(<span class="hljs-string">'Total Profit by Sub-Category and Category'</span>)
+plt.legend(title=<span class="hljs-string">'Category'</span>,  )
+plt.xticks(rotation=<span class="hljs-number">45</span>, ha=<span class="hljs-string">'right'</span>)
+plt.tight_layout()
+plt.show()
+tt = df.groupby([<span class="hljs-string">'Category'</span>, <span class="hljs-string">'Sub-Category'</span>])[<span class="hljs-string">'Profit'</span>].sum()
+tt
+</div></code></pre>
+<p><img src="output_26_0.png" alt="png"></p>
+<pre><code>Category         Sub-Category
+Furniture        Bookcases       -3398.7542
+                 Chairs          26567.1278
+                 Furnishings     13042.0534
+                 Tables         -17725.4811
+Office Supplies  Appliances      18138.0054
+                 Art              6511.8388
+                 Binders         30205.2603
+                 Envelopes        6964.1767
+                 Fasteners         949.5182
+                 Labels           5499.1558
+                 Paper           33830.0381
+                 Storage         21287.1788
+                 Supplies        -1189.0995
+Technology       Accessories     41920.9052
+                 Copiers         55617.8249
+                 Machines         3384.7569
+                 Phones          44493.0524
+Name: Profit, dtype: float64
+</code></pre>
+<h4 id="profit-and-segment">Profit and segment</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># Define color palette</span>
+colors = [<span class="hljs-string">'#1f77b4'</span>, <span class="hljs-string">'#ff7f0e'</span>, <span class="hljs-string">'#2ca02c'</span>]
+
+<span class="hljs-comment"># Group by Segment and calculate total profit</span>
+profit_by_segment = df.groupby(<span class="hljs-string">'Segment'</span>)[<span class="hljs-string">'Profit'</span>].sum().reset_index()
+
+<span class="hljs-comment"># Plot</span>
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+bar_plot = sns.barplot(x=<span class="hljs-string">'Segment'</span>, y=<span class="hljs-string">'Profit'</span>, hue=<span class="hljs-string">'Segment'</span>, data=profit_by_segment, palette=colors, legend=<span class="hljs-literal">False</span>)
+plt.xlabel(<span class="hljs-string">'Segment'</span>)
+plt.ylabel(<span class="hljs-string">'Total Profit'</span>)
+plt.title(<span class="hljs-string">'Total Profit by Segment'</span>)
+
+<span class="hljs-comment"># Add total profit as text on each bar</span>
+<span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(profit_by_segment[<span class="hljs-string">'Profit'</span>]):
+    bar_plot.text(i, v + <span class="hljs-number">500</span>, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
+
+plt.show()
+
+</div></code></pre>
+<p><img src="output_28_0.png" alt="png"></p>
+<pre class="hljs"><code><div>profit_by_segment = df.groupby(<span class="hljs-string">'Segment'</span>)[<span class="hljs-string">'Profit'</span>].sum().reset_index()
+
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>))
+plt.pie(profit_by_segment[<span class="hljs-string">'Profit'</span>], labels=profit_by_segment[<span class="hljs-string">'Segment'</span>], autopct=<span class="hljs-string">'%1.1f%%'</span>, startangle=<span class="hljs-number">140</span>, colors=[<span class="hljs-string">'#1f77b4'</span>, <span class="hljs-string">'#ff7f0e'</span>, <span class="hljs-string">'#2ca02c'</span>])
+plt.title(<span class="hljs-string">'Profit Distribution by Segment'</span>)
+plt.axis(<span class="hljs-string">'equal'</span>)  
+plt.show()
+</div></code></pre>
+<p><img src="output_29_0.png" alt="png"></p>
+<pre class="hljs"><code><div>profit_by_segment = df.groupby(<span class="hljs-string">'Segment'</span>)[<span class="hljs-string">'Sales'</span>].sum().reset_index()
+
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">5</span>))
+plt.pie(profit_by_segment[<span class="hljs-string">'Sales'</span>], labels=profit_by_segment[<span class="hljs-string">'Segment'</span>], autopct=<span class="hljs-string">'%1.1f%%'</span>, startangle=<span class="hljs-number">140</span>, colors=[<span class="hljs-string">'#1f77b4'</span>, <span class="hljs-string">'#ff7f0e'</span>, <span class="hljs-string">'#2ca02c'</span>])
+plt.title(<span class="hljs-string">'Sales Distribution by Segment'</span>)
+plt.axis(<span class="hljs-string">'equal'</span>)  
+plt.show()
+</div></code></pre>
+<p><img src="output_30_0.png" alt="png"></p>
+<h3 id="quantity">Quantity</h3>
+<h4 id="quantity-and-segment">Quantity and segment</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># Define color palette</span>
+colors = [<span class="hljs-string">'#1f77b4'</span>, <span class="hljs-string">'#ff7f0e'</span>, <span class="hljs-string">'#2ca02c'</span>]
+
+<span class="hljs-comment"># Group by Segment and calculate total quantity</span>
+quantity_by_segment = df.groupby(<span class="hljs-string">'Segment'</span>)[<span class="hljs-string">'Quantity'</span>].sum().reset_index()
+
+<span class="hljs-comment"># Plot</span>
+plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
+bar_plot = sns.barplot(x=<span class="hljs-string">'Segment'</span>, y=<span class="hljs-string">'Quantity'</span>, hue=<span class="hljs-string">'Segment'</span>, data=quantity_by_segment, palette=colors, dodge=<span class="hljs-literal">False</span>)
+plt.xlabel(<span class="hljs-string">'Segment'</span>)
+plt.ylabel(<span class="hljs-string">'Total Quantity'</span>)
+plt.title(<span class="hljs-string">'Total Quantity by Segment'</span>)
+
+<span class="hljs-comment"># Add total quantity as text on each bar</span>
+<span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(quantity_by_segment[<span class="hljs-string">'Quantity'</span>]):
+    bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'<span class="hljs-subst">{v:,}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
+
+plt.show()
+
+</div></code></pre>
+<p><img src="output_33_0.png" alt="png"></p>
+<h4 id="quantity-and-state">Quantity and state</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># Group by State and calculate total quantity</span>
+quantity_by_state = df.groupby(<span class="hljs-string">'State'</span>)[<span class="hljs-string">'Quantity'</span>].sum().reset_index()
+
+<span class="hljs-comment"># Sort states by total quantity and select top 15</span>
+top_15_states = quantity_by_state.nlargest(<span class="hljs-number">10</span>, <span class="hljs-string">'Quantity'</span>)
+
+<span class="hljs-comment"># Define color palette</span>
+colors = sns.color_palette(<span class="hljs-string">"Blues_r"</span>, len(top_15_states))
+
+<span class="hljs-comment"># Plot</span>
+plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">6</span>))
+bar_plot = sns.barplot(x=<span class="hljs-string">'State'</span>, y=<span class="hljs-string">'Quantity'</span>, hue=<span class="hljs-string">'State'</span>,legend=<span class="hljs-literal">False</span>,data=top_15_states, palette=colors)
+plt.xlabel(<span class="hljs-string">'State'</span>)
+plt.ylabel(<span class="hljs-string">'Total Quantity'</span>)
+plt.title(<span class="hljs-string">'Top 10 States by Total Quantity'</span>)
+
+<span class="hljs-comment"># Add total quantity as text on each bar</span>
+<span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(top_15_states[<span class="hljs-string">'Quantity'</span>]):
+    bar_plot.text(i, round(v,<span class="hljs-number">2</span>) + <span class="hljs-number">50</span>, <span class="hljs-string">f'<span class="hljs-subst">{round(v,<span class="hljs-number">2</span>):,}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
+
+plt.xticks(rotation=<span class="hljs-number">45</span>)  <span class="hljs-comment"># Rotate x-axis labels for better readability</span>
+plt.show()
+
+</div></code></pre>
+<p><img src="output_35_0.png" alt="png"></p>
+<h4 id="quantity-and-city">Quantity and city</h4>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+
+<span class="hljs-comment"># Group by State and calculate total quantity</span>
+quantity_by_state = df.groupby(<span class="hljs-string">'City'</span>)[<span class="hljs-string">'Quantity'</span>].sum().reset_index()
+
+<span class="hljs-comment"># Sort states by total quantity and select top 15</span>
+top_15_states = quantity_by_state.nlargest(<span class="hljs-number">10</span>, <span class="hljs-string">'Quantity'</span>)
+
+<span class="hljs-comment"># Define color palette</span>
+colors = sns.color_palette(<span class="hljs-string">"Blues_r"</span>, len(top_15_states))
+
+<span class="hljs-comment"># Plot</span>
+plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">6</span>))
+bar_plot = sns.barplot(x=<span class="hljs-string">'City'</span>, y=<span class="hljs-string">'Quantity'</span>, hue=<span class="hljs-string">'City'</span>,legend=<span class="hljs-literal">False</span>,data=top_15_states, palette=colors)
+plt.xlabel(<span class="hljs-string">'City'</span>)
+plt.ylabel(<span class="hljs-string">'Total Quantity'</span>)
+plt.title(<span class="hljs-string">'Top 10 City by Total Quantity'</span>)
+
+<span class="hljs-comment"># Add total quantity as text on each bar</span>
+<span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(top_15_states[<span class="hljs-string">'Quantity'</span>]):
+    bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'<span class="hljs-subst">{round(v,<span class="hljs-number">2</span>):,}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
+
+plt.xticks(rotation=<span class="hljs-number">45</span>)  <span class="hljs-comment"># Rotate x-axis labels for better readability</span>
+plt.show()
+
+</div></code></pre>
+<p><img src="output_37_0.png" alt="png"></p>
+<h3 id="sales">Sales</h3>
+<h4 id="sales-with-region-and-city">Sales with region and city</h4>
+<pre class="hljs"><code><div>top_10_cities_by_region = df.groupby([<span class="hljs-string">'Region'</span>, <span class="hljs-string">'City'</span>])[<span class="hljs-string">'Sales'</span>].sum().groupby(<span class="hljs-string">'Region'</span>, group_keys=<span class="hljs-literal">False</span>).nlargest(<span class="hljs-number">5</span>)
+
+top_10_cities_by_region = top_10_cities_by_region.reset_index()
+
+top_10_cities_by_region_sorted = top_10_cities_by_region.sort_values(by=[<span class="hljs-string">'Region'</span>, <span class="hljs-string">'Sales'</span>], ascending=[<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>])
+plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">8</span>))
+sns.barplot(y=<span class="hljs-string">'City'</span>, x=<span class="hljs-string">'Sales'</span>, hue=<span class="hljs-string">'Region'</span>, data=top_10_cities_by_region_sorted, dodge=<span class="hljs-literal">False</span>, alpha=<span class="hljs-number">0.7</span>, hue_order=top_10_cities_by_region_sorted[<span class="hljs-string">'Region'</span>].unique())
+plt.ylabel(<span class="hljs-string">'City'</span>)
+plt.xlabel(<span class="hljs-string">'Total Sales'</span>)
+plt.title(<span class="hljs-string">'Top 10 Cities by Sales in Each Region'</span>)
+plt.legend(title=<span class="hljs-string">'Region'</span>, bbox_to_anchor=(<span class="hljs-number">1.05</span>, <span class="hljs-number">1</span>), loc=<span class="hljs-string">'upper left'</span>)
+plt.xticks(rotation=<span class="hljs-number">45</span>, ha=<span class="hljs-string">'right'</span>)
+plt.tight_layout()
+plt.show()
+</div></code></pre>
+<p><img src="output_40_0.png" alt="png"></p>
+
+</body>
+</html>
