@@ -20,11 +20,6 @@ body {
 }
 
 #code-csp-warning {
-
-
-
-
-	
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -556,20 +551,15 @@ dtype: int64
       dtype='object')
 </code></pre>
 <h3 id="ship-mode">Ship mode</h3>
-<pre class="hljs"><code><div><span class="hljs-comment"># import seaborn as sns</span>
-<span class="hljs-comment"># import matplotlib.pyplot as plt</span>
+<pre class="hljs"><code><div>profit_by_ship_mode = df.groupby(<span class="hljs-string">'Ship Mode'</span>)[<span class="hljs-string">'Sales'</span>].sum().reset_index()
 
-<span class="hljs-comment"># Group by Ship Mode and calculate total profit</span>
-profit_by_ship_mode = df.groupby(<span class="hljs-string">'Ship Mode'</span>)[<span class="hljs-string">'Sales'</span>].sum().reset_index()
-
-<span class="hljs-comment"># Plot</span>
 plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
 bar_plot = sns.barplot(x=<span class="hljs-string">'Ship Mode'</span>, y=<span class="hljs-string">'Sales'</span>, data=profit_by_ship_mode, hue=<span class="hljs-string">'Ship Mode'</span>,palette=<span class="hljs-string">'viridis'</span>)
 plt.xlabel(<span class="hljs-string">'Ship Mode'</span>)
 plt.ylabel(<span class="hljs-string">'Total Sales'</span>)
 plt.title(<span class="hljs-string">'Sales by Ship Mode'</span>)
 
-<span class="hljs-comment"># Add total profit as text on each bar</span>
+<span class="hljs-comment"># total profit as text on each bar</span>
 <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(profit_by_ship_mode[<span class="hljs-string">'Sales'</span>]):
     bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
 
@@ -577,20 +567,15 @@ plt.show()
 
 </div></code></pre>
 <p><img src="./image/output_18_0.png" alt="png"></p>
-<pre class="hljs"><code><div><span class="hljs-comment"># import seaborn as sns</span>
-<span class="hljs-comment"># import matplotlib.pyplot as plt</span>
-
-<span class="hljs-comment"># Group by Ship Mode and calculate total profit</span>
+<pre class="hljs"><code><div>
 profit_by_ship_mode = df.groupby(<span class="hljs-string">'Ship Mode'</span>)[<span class="hljs-string">'Profit'</span>].sum().reset_index()
 
-<span class="hljs-comment"># Plot</span>
 plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
 bar_plot = sns.barplot(x=<span class="hljs-string">'Ship Mode'</span>, y=<span class="hljs-string">'Profit'</span>, data=profit_by_ship_mode, hue=<span class="hljs-string">'Ship Mode'</span>,palette=<span class="hljs-string">'viridis'</span>)
 plt.xlabel(<span class="hljs-string">'Ship Mode'</span>)
 plt.ylabel(<span class="hljs-string">'Total Profit'</span>)
 plt.title(<span class="hljs-string">'Profit by Ship Mode'</span>)
 
-<span class="hljs-comment"># Add total profit as text on each bar</span>
 <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(profit_by_ship_mode[<span class="hljs-string">'Profit'</span>]):
     bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
 
@@ -598,20 +583,14 @@ plt.show()
 
 </div></code></pre>
 <p><img src="./image/output_19_0.png" alt="png"></p>
-<pre class="hljs"><code><div><span class="hljs-comment"># import seaborn as sns</span>
-<span class="hljs-comment"># import matplotlib.pyplot as plt</span>
+<pre class="hljs"><code><div>profit_by_ship_mode = df.groupby(<span class="hljs-string">'Ship Mode'</span>)[<span class="hljs-string">'Discount'</span>].sum().reset_index()
 
-<span class="hljs-comment"># Group by Ship Mode and calculate total profit</span>
-profit_by_ship_mode = df.groupby(<span class="hljs-string">'Ship Mode'</span>)[<span class="hljs-string">'Discount'</span>].sum().reset_index()
-
-<span class="hljs-comment"># Plot</span>
 plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
 bar_plot = sns.barplot(x=<span class="hljs-string">'Ship Mode'</span>, y=<span class="hljs-string">'Discount'</span>, data=profit_by_ship_mode, hue=<span class="hljs-string">'Ship Mode'</span>,palette=<span class="hljs-string">'viridis'</span>)
 plt.xlabel(<span class="hljs-string">'Ship Mode'</span>)
 plt.ylabel(<span class="hljs-string">'Total Discount'</span>)
 plt.title(<span class="hljs-string">'Discount by Ship Mode'</span>)
 
-<span class="hljs-comment"># Add total profit as text on each bar</span>
 <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(profit_by_ship_mode[<span class="hljs-string">'Discount'</span>]):
     bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
 
@@ -628,20 +607,16 @@ plt.show()
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-<span class="hljs-comment"># Group by City and calculate total profit</span>
 profit_by_city = df.groupby(<span class="hljs-string">'City'</span>)[<span class="hljs-string">'Profit'</span>].sum().reset_index()
 
-<span class="hljs-comment"># Select the top 10 cities with the highest profit</span>
 top_10_profit_cities = profit_by_city.nlargest(<span class="hljs-number">10</span>, <span class="hljs-string">'Profit'</span>)
 
-<span class="hljs-comment"># Plot</span>
 plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">8</span>))
 bar_plot = sns.barplot(x=<span class="hljs-string">'Profit'</span>, y=<span class="hljs-string">'City'</span>, data=top_10_profit_cities, order=top_10_profit_cities[<span class="hljs-string">'City'</span>])
 plt.xlabel(<span class="hljs-string">'Total Profit'</span>)
 plt.ylabel(<span class="hljs-string">'City'</span>)
 plt.title(<span class="hljs-string">'Top 10 Cities with Highest Total Profit'</span>)
 
-<span class="hljs-comment"># Add total profit as text on each bar</span>
 <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(top_10_profit_cities[<span class="hljs-string">'Profit'</span>]):
     bar_plot.text(v + <span class="hljs-number">50</span>, i, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, va=<span class="hljs-string">'center'</span>)
 
@@ -695,20 +670,16 @@ Name: Profit, dtype: float64
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-<span class="hljs-comment"># Define color palette</span>
 colors = [<span class="hljs-string">'#1f77b4'</span>, <span class="hljs-string">'#ff7f0e'</span>, <span class="hljs-string">'#2ca02c'</span>]
 
-<span class="hljs-comment"># Group by Segment and calculate total profit</span>
 profit_by_segment = df.groupby(<span class="hljs-string">'Segment'</span>)[<span class="hljs-string">'Profit'</span>].sum().reset_index()
 
-<span class="hljs-comment"># Plot</span>
 plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
 bar_plot = sns.barplot(x=<span class="hljs-string">'Segment'</span>, y=<span class="hljs-string">'Profit'</span>, hue=<span class="hljs-string">'Segment'</span>, data=profit_by_segment, palette=colors, legend=<span class="hljs-literal">False</span>)
 plt.xlabel(<span class="hljs-string">'Segment'</span>)
 plt.ylabel(<span class="hljs-string">'Total Profit'</span>)
 plt.title(<span class="hljs-string">'Total Profit by Segment'</span>)
 
-<span class="hljs-comment"># Add total profit as text on each bar</span>
 <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(profit_by_segment[<span class="hljs-string">'Profit'</span>]):
     bar_plot.text(i, v + <span class="hljs-number">500</span>, <span class="hljs-string">f'$<span class="hljs-subst">{v:,<span class="hljs-number">.0</span>f}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
 
@@ -739,20 +710,16 @@ plt.show()
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-<span class="hljs-comment"># Define color palette</span>
 colors = [<span class="hljs-string">'#1f77b4'</span>, <span class="hljs-string">'#ff7f0e'</span>, <span class="hljs-string">'#2ca02c'</span>]
 
-<span class="hljs-comment"># Group by Segment and calculate total quantity</span>
 quantity_by_segment = df.groupby(<span class="hljs-string">'Segment'</span>)[<span class="hljs-string">'Quantity'</span>].sum().reset_index()
 
-<span class="hljs-comment"># Plot</span>
 plt.figure(figsize=(<span class="hljs-number">10</span>, <span class="hljs-number">6</span>))
 bar_plot = sns.barplot(x=<span class="hljs-string">'Segment'</span>, y=<span class="hljs-string">'Quantity'</span>, hue=<span class="hljs-string">'Segment'</span>, data=quantity_by_segment, palette=colors, dodge=<span class="hljs-literal">False</span>)
 plt.xlabel(<span class="hljs-string">'Segment'</span>)
 plt.ylabel(<span class="hljs-string">'Total Quantity'</span>)
 plt.title(<span class="hljs-string">'Total Quantity by Segment'</span>)
 
-<span class="hljs-comment"># Add total quantity as text on each bar</span>
 <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(quantity_by_segment[<span class="hljs-string">'Quantity'</span>]):
     bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'<span class="hljs-subst">{v:,}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
 
@@ -764,23 +731,18 @@ plt.show()
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-<span class="hljs-comment"># Group by State and calculate total quantity</span>
 quantity_by_state = df.groupby(<span class="hljs-string">'State'</span>)[<span class="hljs-string">'Quantity'</span>].sum().reset_index()
 
-<span class="hljs-comment"># Sort states by total quantity and select top 15</span>
 top_15_states = quantity_by_state.nlargest(<span class="hljs-number">10</span>, <span class="hljs-string">'Quantity'</span>)
 
-<span class="hljs-comment"># Define color palette</span>
 colors = sns.color_palette(<span class="hljs-string">"Blues_r"</span>, len(top_15_states))
 
-<span class="hljs-comment"># Plot</span>
 plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">6</span>))
 bar_plot = sns.barplot(x=<span class="hljs-string">'State'</span>, y=<span class="hljs-string">'Quantity'</span>, hue=<span class="hljs-string">'State'</span>,legend=<span class="hljs-literal">False</span>,data=top_15_states, palette=colors)
 plt.xlabel(<span class="hljs-string">'State'</span>)
 plt.ylabel(<span class="hljs-string">'Total Quantity'</span>)
 plt.title(<span class="hljs-string">'Top 10 States by Total Quantity'</span>)
 
-<span class="hljs-comment"># Add total quantity as text on each bar</span>
 <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(top_15_states[<span class="hljs-string">'Quantity'</span>]):
     bar_plot.text(i, round(v,<span class="hljs-number">2</span>) + <span class="hljs-number">50</span>, <span class="hljs-string">f'<span class="hljs-subst">{round(v,<span class="hljs-number">2</span>):,}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
 
@@ -793,23 +755,18 @@ plt.show()
 <pre class="hljs"><code><div><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 <span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 
-<span class="hljs-comment"># Group by State and calculate total quantity</span>
 quantity_by_state = df.groupby(<span class="hljs-string">'City'</span>)[<span class="hljs-string">'Quantity'</span>].sum().reset_index()
 
-<span class="hljs-comment"># Sort states by total quantity and select top 15</span>
 top_15_states = quantity_by_state.nlargest(<span class="hljs-number">10</span>, <span class="hljs-string">'Quantity'</span>)
 
-<span class="hljs-comment"># Define color palette</span>
 colors = sns.color_palette(<span class="hljs-string">"Blues_r"</span>, len(top_15_states))
 
-<span class="hljs-comment"># Plot</span>
 plt.figure(figsize=(<span class="hljs-number">12</span>, <span class="hljs-number">6</span>))
 bar_plot = sns.barplot(x=<span class="hljs-string">'City'</span>, y=<span class="hljs-string">'Quantity'</span>, hue=<span class="hljs-string">'City'</span>,legend=<span class="hljs-literal">False</span>,data=top_15_states, palette=colors)
 plt.xlabel(<span class="hljs-string">'City'</span>)
 plt.ylabel(<span class="hljs-string">'Total Quantity'</span>)
 plt.title(<span class="hljs-string">'Top 10 City by Total Quantity'</span>)
 
-<span class="hljs-comment"># Add total quantity as text on each bar</span>
 <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> enumerate(top_15_states[<span class="hljs-string">'Quantity'</span>]):
     bar_plot.text(i, v + <span class="hljs-number">50</span>, <span class="hljs-string">f'<span class="hljs-subst">{round(v,<span class="hljs-number">2</span>):,}</span>'</span>, color=<span class="hljs-string">'black'</span>, ha=<span class="hljs-string">'center'</span>)
 
